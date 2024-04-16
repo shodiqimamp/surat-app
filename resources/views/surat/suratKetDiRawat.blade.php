@@ -91,7 +91,6 @@
         font-size: 16px;
         text-align: justify;
     }
-
     .kwitansi tr td {
         padding: 5px;
     }
