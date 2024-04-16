@@ -20,3 +20,4 @@ Route::get('/suratSakit', function () {
 
 Route::get('/surat-sakit/{no_rw}', [SuratSakitController::class, 'SuratSakit']);
 Route::get('/surat-ket-ranap/{no_rw}', [SuratSakitController::class, 'SuratKetRanap']);
+Route::get('/surat-ket-dirawat/{no_rw}', [SuratSakitController::class, 'SuratKetDiRawat']);

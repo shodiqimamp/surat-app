@@ -129,4 +129,26 @@ class suratSakitController extends Controller
         // Mengembalikan gambar JPG sebagai response
         return $image;
     }
+
+    public function SuratKetDiRawat($no_rw)
+    {
+        $no_rawat = str_replace('&', '/', $no_rw);
+
+        // Panggil fungsi getData untuk mendapatkan data pasien
+        $data = $this->getData($no_rawat);
+
+        // Pastikan variabel $data diteruskan ke dalam view
+        $html = view('surat.suratKetDiRawat', compact('data'));
+
+        // Konversi HTML menjadi gambar JPG dengan SnappyImage
+        $image = SnappyImage::loadHTML($html)
+                            ->setOption('format', 'jpg') // Format gambar
+                            ->setOption('encoding', 'utf-8') // Encoding karakter
+                            ->setOption('quality', 100) // Kualitas gambar (0-100)
+                            ->setOption('enable-local-file-access', true)
+                            ->inline(); // Tampilkan gambar langsung di browser
+
+        // Mengembalikan gambar JPG sebagai response
+        return $image;
+    }
 }

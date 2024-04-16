@@ -16,7 +16,7 @@
                     <div style="font-size: 19px; font-weight: bold; margin-bottom: 5px; text-align: center;">
                         RUMAH SAKIT PUTRA WASPADA
                     </div>
-                    <div style="font-size: 16px; text-align: center;">
+                    <div style="font-size: 14px; text-align: center;">
                         Jl. Jayengkusuma No. 66 RT. 02 RW. 06 Ds. Ngujang <br>Kec. Kedungwaru Tulungagung - 66228<br>
                         Telp (0355) 335550, Fax. 322522 <br>
                         email : rsputrawaspada@yahoo.com
@@ -31,10 +31,10 @@
     <hr class="garis1"/>
     <div style="display: flex; align-items: center; justify-content: center;">
         <div class="content">
-            <h3 style="text-align: center;">SURAT KETERANGAN DOKTER</h3>
-            <p>Yang bertanda tangan dibawah ini : </p>
+            <h3 style="text-align: center;">SURAT KETERANGAN RAWAT INAP</h3>
+            <p style="padding-left: 50px;">Yang bertanda tangan dibawah ini : </p>
             <p>Nama&nbsp; &nbsp; &nbsp;<span style="margin-left: 35px;">: {{ $data['dpjp'] }} </span></p>
-            <p>Dengan ini menerangkan bahwa telah melakukan pemeriksaan kesehatan pada:</p>
+            <p style="padding-left: 50px;">Dengan ini menerangkan bahwa :</p>
                 <table>
                     <tr class="data-pasien">
                         <td>Nama</td>
@@ -42,14 +42,14 @@
                         <td>{{$data['nm_pasien']}}</td>
                     </tr>
                     <tr class="data-pasien">
+                        <td>No. RM</td>
+                        <td style="padding-left: 10px;">:</td>
+                        <td>{{$data['no_rm']}}</td>
+                    </tr>
+                    <tr class="data-pasien">
                         <td>Umur</td>
                         <td style="padding-left: 10px;">:</td>
                         <td>{{ $data['umur'] == 0 ? '< 1' : $data['umur'] }} Tahun <span style="padding-left: 150px;">Jenis Kelamin : {{ $data['jk'] === 'L' ? 'Laki-Laki' : 'Perempuan' }}</span></td>
-                    </tr>
-                    <tr class="data-pasien">
-                        <td>Pendidikan</td>
-                        <td style="padding-left: 10px;">:</td>
-                        <td>{{$data['pendidikan']}}</td>
                     </tr>
                     <tr class="data-pasien">
                         <td>Pekerjaan</td>
@@ -62,21 +62,20 @@
                         <td>{{$data['alamat']}}</td>
                     </tr>
                 </table>
-            <p style="line-height: 2; margin-top: 1px;">Setelah dilakukan pemeriksaan, yang bersangkutan dinyatakan <span style="font-weight: bold;">SAKIT</span> dan tidak bisa untuk melakukan kegiatan sesuai dengan pekerjaan/pendidikannya.
-                Sehubungan dengan hal tersebut perlu istirahat selama <span style="border-bottom: 2px solid black;">{{$data['lama']}} hari</span>. Mulai tanggal <span style="border-bottom: 2px solid black;";>{{$data['tglawal']}}</span>
-                s/d <span style="border-bottom: 2px solid black;">{{$data['tglakhir']}}</span>.</p>
-            <p style="margin-bottom: 1px;">Demikian surat keterangan ini dibuat untuk diketahui dan dipergunakan sebagaimana mestinya.</p>
+            <p style="line-height: 2; margin-top: 1px;">Benar dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{$data['tglawal']}} dan sampai {{$data['tglakhir']}}.</p>
+            <p style="margin-bottom: 1px;">Demikian surat keterangan ini dibuat untuk dapat dipergunakan seperlunya.</p>
             <br>
         </div>
         <div style=" float:right">
             <div style="width: 300px;text-align: center;">
                 <p>Tulungagung, {{$data['tgl_terbit']}}</p>
                 <p style="margin: 0;">Dokter Pemeriksa</p>
-                <img style="margin: 5px;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(160)->generate('Dikeluarkan di Rumah Sakit Putra Waspada Telp (0355)335550, Fax. 322522 ditandatangani secara elektronik oleh ' . $data["dpjp"] . ' pada tanggal ' . $data["tgl_terbit"])) }}" />
+                <img style="margin: 0;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(180)->generate('Dikeluarkan di Rumah Sakit Putra Waspada Telp (0355)335550, Fax. 322522 ditandatangani secara elektronik oleh ' . $data["dpjp"] . ' pada tanggal ' . $data["tgl_terbit"])) }}" />
                 <p style="margin: 0;">{{ $data['dpjp'] }}</p>
             </div>
         </div>
     </div>
+
 </body>
 
 <style type="text/css">
@@ -92,6 +91,7 @@
         font-size: 16px;
         text-align: justify;
     }
+
     .kwitansi tr td {
         padding: 5px;
     }
