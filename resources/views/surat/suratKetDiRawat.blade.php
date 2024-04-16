@@ -32,9 +32,9 @@
     <div style="display: flex; align-items: center; justify-content: center;">
         <div class="content">
             <h3 style="text-align: center;">SURAT KETERANGAN RAWAT INAP</h3>
-            <p style="padding-left: 50px;">Yang bertanda tangan dibawah ini : </p>
+            <p style="">Yang bertanda tangan dibawah ini : </p>
             <p>Nama&nbsp; &nbsp; &nbsp;<span style="margin-left: 35px;">: {{ $data['dpjp'] }} </span></p>
-            <p style="padding-left: 50px;">Dengan ini menerangkan bahwa :</p>
+            <p style="">Dengan ini menerangkan bahwa :</p>
                 <table>
                     <tr class="data-pasien">
                         <td>Nama</td>
