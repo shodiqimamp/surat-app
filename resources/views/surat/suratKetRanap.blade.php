@@ -70,7 +70,7 @@
             <div style="width: 300px;text-align: center;">
                 <p>Tulungagung, {{$data['tgl_terbit']}}</p>
                 <p style="margin: 0;">Dokter Pemeriksa</p>
-                <img style="margin: 0;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(180)->generate('Dikeluarkan di Rumah Sakit Putra Waspada Telp (0355)335550, Fax. 322522 ditandatangani secara elektronik oleh ' . $data["dpjp"] . ' pada tanggal ' . $data["tgl_terbit"])) }}" />
+                <img style="margin: 0;" src="data:image/png;base64,{{ base64_encode(QrCode::format('png')->size(160)->generate('Dikeluarkan di Rumah Sakit Putra Waspada Telp (0355)335550, Fax. 322522 ditandatangani secara elektronik oleh ' . $data["dpjp"] . ' pada tanggal ' . $data["tgl_terbit"])) }}" />
                 <p style="margin: 0;">{{ $data['dpjp'] }}</p>
             </div>
         </div>
