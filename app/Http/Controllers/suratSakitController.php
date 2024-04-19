@@ -87,6 +87,7 @@ class suratSakitController extends Controller
         return $data;
     }
 
+
     public function getDataRanap($no_rawat) {
         $sql = "SELECT reg_periksa.kd_dokter, reg_periksa.no_rkm_medis, pasien.nm_pasien, dokter.nm_dokter, pasien.tgl_lahir, pasien.jk,
                 pasien.pnd, pasien.pekerjaan, pasien.alamatpj, reg_periksa.status_lanjut, CONCAT(pasien.alamat, ' ', kecamatan.nm_kec, ' ', kabupaten.nm_kab) AS alamat,
@@ -183,6 +184,15 @@ class suratSakitController extends Controller
 
     }
 
+    public function getNoRawat($no_rm){
+        $sql = "SELECT no_rawat FROM reg_periksa WHERE no_rkm_medis = :no_rm AND status_lanjut = 'Ranap' ORDER BY tgl_registrasi DESC LIMIT 1";
+        $bindings = ['no_rm' => $no_rm];
+        $no_rawat = DB::select($sql, $bindings);
+
+
+        return $no_rawat;
+    }
+
     public function cekDoubleData($no_rawat, $tglawal, $tgl_akhir)
     {
         $no_surat = 'SKR' . str_replace('/', '', $no_rawat);
@@ -257,9 +267,9 @@ class suratSakitController extends Controller
         return $image;
     }
 
-    public function SuratKetDiRawat($no_rw)
+    public function SuratKetDiRawat($no_rm)
     {
-        $no_rawat = str_replace('&', '/', $no_rw);
+        $no_rawat = $this->getNoRawat($no_rm);
 
         // Panggil fungsi getData untuk mendapatkan data pasien
         $data = $this->getDataRanap($no_rawat);
