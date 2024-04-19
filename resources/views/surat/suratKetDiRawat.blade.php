@@ -62,7 +62,7 @@
                         <td>{{$data['alamat']}}</td>
                     </tr>
                 </table>
-            <p style="line-height: 2; margin-top: 1px;">Benar dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{$data['tgl_masuk']}} dan sampai tanggal{{$data['tgl_bayar']}}.</p>
+            <p style="line-height: 2; margin-top: 1px;">Benar dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{$data['tgl_masuk']}} dan sampai tanggal {{$data['tgl_bayar']}}.</p>
             <p style="margin-bottom: 1px;">Demikian surat keterangan ini dibuat untuk dapat dipergunakan seperlunya.</p>
             <br>
         </div>
