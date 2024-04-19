@@ -183,14 +183,15 @@ class suratSakitController extends Controller
         return $html;
 
     }
-
     public function getNoRawat($no_rm){
-        $sql = "SELECT no_rawat FROM reg_periksa WHERE no_rkm_medis = :no_rm AND status_lanjut = 'Ranap' ORDER BY tgl_registrasi DESC LIMIT 1";
-        $bindings = ['no_rm' => $no_rm];
-        $no_rawat = DB::select($sql, $bindings);
+        $no_rawat_object = DB::table('reg_periksa')
+            ->select('no_rawat')
+            ->where('no_rkm_medis', $no_rm)
+            ->where('status_lanjut', 'Ranap')
+            ->orderByDesc('tgl_registrasi')
+            ->first();
 
-
-        return $no_rawat;
+        return $no_rawat_object ? $no_rawat_object->no_rawat : null;
     }
 
     public function cekDoubleData($no_rawat, $tglawal, $tgl_akhir)
