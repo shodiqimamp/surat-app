@@ -32,9 +32,9 @@
     <div style="display: flex; align-items: center; justify-content: center;">
         <div class="content">
             <h3 style="text-align: center;">SURAT KETERANGAN RAWAT INAP</h3>
-            <p style="padding-left: 50px;">Yang bertanda tangan dibawah ini : </p>
-            <p>Nama&nbsp; &nbsp; &nbsp;<span style="margin-left: 35px;">: {{ $data['dpjp'] }} </span></p>
-            <p style="padding-left: 50px;">Dengan ini menerangkan bahwa :</p>
+            <p>Yang bertanda tangan dibawah ini : </p>
+            <p>Nama&nbsp; &nbsp;<span style="margin-left: 35px;">: {{ $data['dpjp'] }} </span></p>
+            <p>Dengan ini menerangkan bahwa :</p>
                 <table>
                     <tr class="data-pasien">
                         <td>Nama</td>
@@ -62,7 +62,7 @@
                         <td>{{$data['alamat']}}</td>
                     </tr>
                 </table>
-            <p style="line-height: 2; margin-top: 1px;">Telah dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{$data['tglawal']}} dan sampai saat ini masih dalam perawatan diruang rawat inap (<span style="font-style: italic;">opname</span>).</p>
+            <p style="line-height: 2; margin-top: 1px;">Telah dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{$data['tgl_masuk']}} dan sampai saat ini masih dalam perawatan diruang rawat inap (<span style="font-style: italic;">opname</span>).</p>
             <p style="margin-bottom: 1px;">Demikian surat keterangan ini dibuat untuk dapat dipergunakan seperlunya.</p>
             <br>
         </div>
