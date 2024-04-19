@@ -62,7 +62,8 @@
                         <td>{{$data['alamat']}}</td>
                     </tr>
                 </table>
-            <p style="line-height: 2; margin-top: 1px;">Telah dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{$data['tgl_masuk']}} dan sampai saat ini masih dalam perawatan diruang rawat inap (<span style="font-style: italic;">opname</span>).</p>
+            <p style="line-height: 2; margin-top: 1px;">Telah dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{ \Carbon\Carbon::parse($data['tgl_masuk'])->format('d-m-Y') }}
+             dan sampai saat ini masih dalam perawatan diruang rawat inap (<span style="font-style: italic;">opname</span>).</p>
             <p style="margin-bottom: 1px;">Demikian surat keterangan ini dibuat untuk dapat dipergunakan seperlunya.</p>
             <br>
         </div>
