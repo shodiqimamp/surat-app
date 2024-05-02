@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Helpers\NumberConverter;
 use DateTime;
 use Illuminate\Http\Request;
-use Riskihajar\Terbilang\Facades\Terbilang;
 use SnappyImage;
 use PDF;
 use Illuminate\Support\Facades\View;
@@ -245,7 +243,18 @@ class suratSakitController extends Controller
 
             // $lama = $data['lama'] . '('. $lamaTranslate . ')';
 
-            if ($cek_data > 1) {
+            if ($cek_data === 0) {
+                try {
+                    DB::table('suratsakit')
+                        ->where('no_rawat', $no_rawat)
+                        ->update(['no_surat' => $no_surat]);
+
+                } catch (\Throwable $th) {
+                    // Tangani exception dengan memberikan pesan yang jelas
+                    throw new \Exception('Error rendering HTML: ' . $th->getMessage());
+                }
+
+            } else{
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
@@ -256,16 +265,7 @@ class suratSakitController extends Controller
                         ->where('no_rawat', $no_rawat)
                         ->update(['no_surat' => $no_surat]);
                 } catch (\Throwable $th) {
-                    // Tangani exception dengan memberikan pesan yang jelas
-                    throw new \Exception('Error rendering HTML: ' . $th->getMessage());
-                }
 
-            } else{
-                try {
-                    DB::table('suratsakit')
-                        ->where('no_rawat', $no_rawat)
-                        ->update(['no_surat' => $no_surat]);
-                } catch (\Throwable $th) {
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
                 }
             }
