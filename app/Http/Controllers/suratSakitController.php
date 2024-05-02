@@ -61,7 +61,7 @@ class suratSakitController extends Controller
             $tglakhir = new DateTime($result[0]->tanggalakhir);
             $lama = $tglawal->diff($tglakhir)->days + 1;
 
-            $tgl_terbit = Carbon::now()->locale('id')->format('d F Y');
+            $tgl_terbit = Carbon::now()->translatedFormat('d F Y');
 
             $data = [
                 'no_rawat' => $no_rawat,
@@ -136,7 +136,7 @@ class suratSakitController extends Controller
             $tglawal = new DateTime($result[0]->tanggalawal);
             $tglakhir = new DateTime($result[0]->tanggalakhir);
 
-            $tgl_terbit = Carbon::now()->locale('id')->format('d F Y');
+            $tgl_terbit = Carbon::now()->translatedFormat('d F Y');
             $tgl_billing = $result[0]->tgl_bayar;
             $tgl_masuk = $result[0]->tgl_masuk;
             $tgl_keluar = $result[0]->tgl_keluar;
