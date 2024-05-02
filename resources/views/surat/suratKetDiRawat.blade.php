@@ -62,8 +62,7 @@
                         <td>{{$data['alamat']}}</td>
                     </tr>
                 </table>
-            <p style="line-height: 2; margin-top: 1px;">Benar dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{ \Carbon\Carbon::parse($data['tgl_masuk'])->format('d-m-Y') }}
-             dan sampai tanggal {{ \Carbon\Carbon::parse($data['tgl_bayar'])->format('d-m-Y') }}.</p>
+            <p style="line-height: 2; margin-top: 1px;">Benar dirawat di Rumah Sakit Putra Waspada, sejak tanggal {{ \Carbon\Carbon::parse($data['tgl_masuk'])->format('d-m-Y') }} dan sampai tanggal {{ \Carbon\Carbon::parse($data['tgl_bayar'])->format('d-m-Y') }}.</p>
             <p style="margin-bottom: 1px;">Demikian surat keterangan ini dibuat untuk dapat dipergunakan seperlunya.</p>
             <br>
         </div>

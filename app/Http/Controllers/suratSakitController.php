@@ -215,19 +215,32 @@ class suratSakitController extends Controller
 
         // Panggil fungsi getData untuk mendapatkan data pasien
         $data = $this->getDataSakit($no_rawat);
+        try {
 
-        // Pastikan variabel $data diteruskan ke dalam view
-        $html = view('surat.suratSakit', compact('data'));
+            $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
 
-        $image = SnappyImage::loadHTML($html)
-                            ->setOption('format', 'jpg') // Format gambar
-                            ->setOption('encoding', 'utf-8') // Encoding karakter
-                            ->setOption('quality', 100) // Kualitas gambar (0-100)
-                            ->setOption('enable-local-file-access', true)
-                            ->inline(); // Tampilkan gambar langsung di browser
+            DB::table('suratsakit')
+                ->where('no_rawat', $no_rawat)
+                ->update(['no_surat' => $no_surat]);
 
-        // Mengembalikan gambar JPG sebagai response
-        return $image;
+            // Pastikan variabel $data diteruskan ke dalam view
+
+            $html = view('surat.suratSakit', compact('data'));
+
+            $image = SnappyImage::loadHTML($html)
+                                ->setOption('format', 'jpg') // Format gambar
+                                ->setOption('encoding', 'utf-8') // Encoding karakter
+                                ->setOption('quality', 100) // Kualitas gambar (0-100)
+                                ->setOption('enable-local-file-access', true)
+                                ->inline(); // Tampilkan gambar langsung di browser
+
+            // Mengembalikan gambar JPG sebagai response
+            return $image;
+
+        } catch (\Throwable $th) {
+            throw new \Exception('Error rendering HTML: ' . $th->getMessage());
+        }
+
     }
 
     public function SuratKetRanap($no_rw)
