@@ -262,8 +262,8 @@ class suratSakitController extends Controller
 
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
                 }
+
             }
-            // Pastikan variabel $data diteruskan ke dalam view
 
             $html = view('surat.suratSakit', compact('data'));
 
@@ -273,8 +273,6 @@ class suratSakitController extends Controller
                                 ->setOption('quality', 100) // Kualitas gambar (0-100)
                                 ->setOption('enable-local-file-access', true)
                                 ->inline(); // Tampilkan gambar langsung di browser
-
-            // Mengembalikan gambar JPG sebagai response
             return $image;
 
         } catch (\Throwable $th) {
