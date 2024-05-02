@@ -249,6 +249,21 @@ class suratSakitController extends Controller
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
                 }
 
+            } else{
+                try {
+                    DB::table('suratsakit')
+                        ->where('no_rawat', $no_rawat)
+                        ->where('no_surat', $no_surat)
+                        ->delete();
+
+                    DB::table('suratsakit')
+                        ->where('no_rawat', $no_rawat)
+                        ->update(['no_surat' => $no_surat]);
+                } catch (\Throwable $th) {
+
+
+                    throw new \Exception('Error rendering HTML: ' . $th->getMessage());
+                }
             }
             // Pastikan variabel $data diteruskan ke dalam view
 
