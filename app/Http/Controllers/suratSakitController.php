@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Helpers\NumberConverter;
 use DateTime;
 use Illuminate\Http\Request;
 use SnappyImage;
@@ -226,6 +227,24 @@ class suratSakitController extends Controller
         return $count;
     }
 
+    public function convertNumberToWord($number)
+    {
+        $words = [
+            '', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh',
+            'Sebelas', 'Dua Belas', 'Tiga Belas', 'Empat Belas', 'Lima Belas', 'Enam Belas', 'Tujuh Belas', 'Delapan Belas', 'Sembilan Belas'
+        ];
+
+        if ($number < 20) {
+            return $words[$number];
+        } elseif ($number < 100) {
+            $tens = floor($number / 10);
+            $ones = $number % 10;
+            return $words[$tens] . ' Puluh ' . $words[$ones];
+        } else {
+            return 'Angka terlalu besar untuk dikonversi.';
+        }
+    }
+
     public function SuratSakit($no_rw)
     {
         $no_rawat = str_replace('&', '/', $no_rw);
@@ -238,11 +257,13 @@ class suratSakitController extends Controller
 
             $cek_data = $this->cekDoubleDataSakit($no_rawat);
 
+            $lama = NumberConverter::convertToWord($data['lama']);
+
             if ($cek_data === 0) {
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
-                        ->update(['no_surat' => $no_surat]);
+                        ->update(['no_surat' => $no_surat, 'lamasakit' => $lama]);
 
                 } catch (\Throwable $th) {
                     // Tangani exception dengan memberikan pesan yang jelas
@@ -258,7 +279,7 @@ class suratSakitController extends Controller
 
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
-                        ->update(['no_surat' => $no_surat]);
+                        ->update(['no_surat' => $no_surat, 'lamasakit' => $lama]);
                 } catch (\Throwable $th) {
 
 
