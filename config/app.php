@@ -175,6 +175,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Riskihajar\Terbilang\TerbilangServiceProvider::class
 
     ],
 
@@ -233,7 +234,7 @@ return [
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-
+        'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class
 
     ],
 
