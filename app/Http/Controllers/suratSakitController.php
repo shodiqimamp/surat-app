@@ -213,12 +213,12 @@ class suratSakitController extends Controller
 
     public function cekDoubleDataSakit($no_rawat)
     {
-        // $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
+        $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
 
         $sql = "SELECT * FROM suratsakit WHERE no_rawat = ?";
 
         // Menggunakan DB::select dengan placeholder
-        $result = DB::select($sql, [$no_rawat]);
+        $result = DB::select($sql, [$no_surat, $no_rawat]);
 
         // Menghitung jumlah baris yang dikembalikan
         $count = count($result);
@@ -248,7 +248,7 @@ class suratSakitController extends Controller
                     // Tangani exception dengan memberikan pesan yang jelas
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
                 }
-            } elseif($cek_data >= 2){
+            } else{
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
