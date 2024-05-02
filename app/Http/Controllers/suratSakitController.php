@@ -245,24 +245,23 @@ class suratSakitController extends Controller
 
             // $lama = $data['lama'] . '('. $lamaTranslate . ')';
 
-            if ($cek_data === 0) {
-                try {
-                    DB::table('suratsakit')
-                        ->where('no_rawat', $no_rawat)
-                        ->update(['no_surat' => $no_surat]);
-
-                } catch (\Throwable $th) {
-                    // Tangani exception dengan memberikan pesan yang jelas
-                    throw new \Exception('Error rendering HTML: ' . $th->getMessage());
-                }
-
-            } elseif($cek_data > 1){
+            if ($cek_data > 1) {
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->where('no_surat', $no_surat)
                         ->delete();
 
+                    DB::table('suratsakit')
+                        ->where('no_rawat', $no_rawat)
+                        ->update(['no_surat' => $no_surat]);
+                } catch (\Throwable $th) {
+                    // Tangani exception dengan memberikan pesan yang jelas
+                    throw new \Exception('Error rendering HTML: ' . $th->getMessage());
+                }
+
+            } else{
+                try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->update(['no_surat' => $no_surat]);
