@@ -270,7 +270,7 @@ class suratSakitController extends Controller
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
                 }
 
-            } else{
+            } elseif($cek_data > 1){
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
