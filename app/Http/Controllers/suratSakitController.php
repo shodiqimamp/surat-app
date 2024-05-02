@@ -218,7 +218,7 @@ class suratSakitController extends Controller
         $sql = "SELECT * FROM suratsakit WHERE no_rawat = ?";
 
         // Menggunakan DB::select dengan placeholder
-        $result = DB::select($sql, [$no_surat, $no_rawat]);
+        $result = DB::select($sql, [$no_rawat]);
 
         // Menghitung jumlah baris yang dikembalikan
         $count = count($result);
