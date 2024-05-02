@@ -239,12 +239,11 @@ class suratSakitController extends Controller
 
             $cek_data = $this->cekDoubleDataSakit($no_rawat);
 
-            if($cek_data === 0) {
+            if($cek_data === 1) {
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->update(['no_surat' => $no_surat]);
-
                 } catch (\Throwable $th) {
                     // Tangani exception dengan memberikan pesan yang jelas
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
