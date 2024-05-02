@@ -213,12 +213,12 @@ class suratSakitController extends Controller
 
     public function cekDoubleDataSakit($no_rawat)
     {
-        $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
+        // $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
 
-        $sql = "SELECT * FROM suratsakit WHERE no_surat LIKE ? AND no_rawat = ?";
+        $sql = "SELECT * FROM suratsakit WHERE no_rawat = ?";
 
         // Menggunakan DB::select dengan placeholder
-        $result = DB::select($sql, [$no_surat ,$no_rawat]);
+        $result = DB::select($sql, [$no_rawat]);
 
         // Menghitung jumlah baris yang dikembalikan
         $count = count($result);
@@ -239,11 +239,7 @@ class suratSakitController extends Controller
 
             $cek_data = $this->cekDoubleDataSakit($no_rawat);
 
-            // $lamaTranslate = Terbilang::make($data['lama']->numeric);
-
-            // $lama = $data['lama'] . '('. $lamaTranslate . ')';
-
-            if ($cek_data === 0) {
+            if($cek_data === 0) {
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
@@ -253,17 +249,17 @@ class suratSakitController extends Controller
                     // Tangani exception dengan memberikan pesan yang jelas
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
                 }
-
-            } else{
+            } elseif($cek_data >= 2){
                 try {
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->where('no_surat', $no_surat)
                         ->delete();
 
-                    DB::table('suratsakit')
+                        DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->update(['no_surat' => $no_surat]);
+
                 } catch (\Throwable $th) {
 
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
