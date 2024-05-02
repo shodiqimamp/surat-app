@@ -251,11 +251,10 @@ class suratSakitController extends Controller
             } else{
                 try {
                     DB::table('suratsakit')
-                        ->where('no_rawat', $no_rawat)
                         ->where('no_surat', $no_surat)
                         ->delete();
 
-                        DB::table('suratsakit')
+                    DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->update(['no_surat' => $no_surat]);
 
