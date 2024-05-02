@@ -232,7 +232,6 @@ class suratSakitController extends Controller
         $no_rawat = str_replace('&', '/', $no_rw);
 
         // Panggil fungsi getData untuk mendapatkan data pasien
-        $data = $this->getDataSakit($no_rawat);
         try {
 
             $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
@@ -244,6 +243,8 @@ class suratSakitController extends Controller
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->update(['no_surat' => $no_surat]);
+
+                    $data = $this->getDataSakit($no_rawat);
                 } catch (\Throwable $th) {
                     // Tangani exception dengan memberikan pesan yang jelas
                     throw new \Exception('Error rendering HTML: ' . $th->getMessage());
@@ -257,6 +258,8 @@ class suratSakitController extends Controller
                     DB::table('suratsakit')
                         ->where('no_rawat', $no_rawat)
                         ->update(['no_surat' => $no_surat]);
+
+                    $data = $this->getDataSakit($no_rawat);
 
                 } catch (\Throwable $th) {
 
