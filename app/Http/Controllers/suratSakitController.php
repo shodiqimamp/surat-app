@@ -209,6 +209,22 @@ class suratSakitController extends Controller
         return $count;
     }
 
+
+    public function cekDoubleDataSakit($no_rawat)
+    {
+        $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
+
+        $sql = "SELECT * FROM suratsakit WHERE no_surat LIKE ? AND no_rawat = ?";
+
+        // Menggunakan DB::select dengan placeholder
+        $result = DB::select($sql, [$no_surat ,$no_rawat]);
+
+        // Menghitung jumlah baris yang dikembalikan
+        $count = count($result);
+
+        return $count;
+    }
+
     public function SuratSakit($no_rw)
     {
         $no_rawat = str_replace('&', '/', $no_rw);
@@ -219,10 +235,20 @@ class suratSakitController extends Controller
 
             $no_surat = 'SKS' . str_replace('/', '', $no_rawat);
 
-            DB::table('suratsakit')
-                ->where('no_rawat', $no_rawat)
-                ->update(['no_surat' => $no_surat]);
+            $cek_data = $this->cekDoubleDataSakit($no_rawat);
 
+            if ($cek_data === 0) {
+                try {
+                    DB::table('suratsakit')
+                        ->where('no_rawat', $no_rawat)
+                        ->update(['no_surat' => $no_surat]);
+
+                } catch (\Throwable $th) {
+                    // Tangani exception dengan memberikan pesan yang jelas
+                    throw new \Exception('Error rendering HTML: ' . $th->getMessage());
+                }
+
+            }
             // Pastikan variabel $data diteruskan ke dalam view
 
             $html = view('surat.suratSakit', compact('data'));
