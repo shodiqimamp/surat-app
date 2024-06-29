@@ -49,8 +49,11 @@ class suratSakitController extends Controller
 
             $tanggal_lahir = strtotime($result[0]->tgl_lahir);
             $tahun_lahir = date('Y', $tanggal_lahir);
-            // $umur_pasien = date('Y') - $tahun_lahir;
-            $umur_pasien = $result[0]->umur;
+
+            $umur = $result[0]->umur;
+            $search = ["Th", "Bl", "Hr"];
+            $replace = ["Tahun", "Bulan", "Hari"];
+            $umur_pasien = str_replace($search, $replace, $umur);
 
             $jk = $result[0]->jk;
             $pekerjaan = $result[0]->pekerjaan;
@@ -127,7 +130,10 @@ class suratSakitController extends Controller
             $tanggal_lahir = strtotime($result[0]->tgl_lahir);
             $tahun_lahir = date('Y', $tanggal_lahir);
             // $umur_pasien = date('Y') - $tahun_lahir;
-            $umur_pasien = $result[0]->umur;
+            $umur = $result[0]->umur;
+            $search = ["Th", "Bl", "Hr"];
+            $replace = ["Tahun", "Bulan", "Hari"];
+            $umur_pasien = str_replace($search, $replace, $umur);
 
             $jk = $result[0]->jk;
             $pekerjaan = $result[0]->pekerjaan;
