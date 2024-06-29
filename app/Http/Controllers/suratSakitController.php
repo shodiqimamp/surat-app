@@ -14,7 +14,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class suratSakitController extends Controller
 {
     public function getDataSakit($no_rawat) {
-        $sql = "SELECT reg_periksa.kd_dokter,reg_periksa.no_rkm_medis, reg_periksa.no_rkm_medis, pasien.nm_pasien, dokter.nm_dokter,
+        $sql = "SELECT reg_periksa.kd_dokter,reg_periksa.no_rkm_medis, reg_periksa.no_rkm_medis, pasien.nm_pasien, dokter.nm_dokter, pasien.umur,
                 pasien.tgl_lahir, pasien.jk, pasien.pnd, pasien.pekerjaan, pasien.alamatpj, reg_periksa.status_lanjut,
                 concat(pasien.alamat, ', ',kelurahan.nm_kel,', KEC ',kecamatan.nm_kec, ', ', kabupaten.nm_kab) as alamat,
                 suratsakit.tanggalawal, suratsakit.tanggalakhir, suratsakit.lamasakit,
@@ -49,7 +49,8 @@ class suratSakitController extends Controller
 
             $tanggal_lahir = strtotime($result[0]->tgl_lahir);
             $tahun_lahir = date('Y', $tanggal_lahir);
-            $umur_pasien = date('Y') - $tahun_lahir;
+            // $umur_pasien = date('Y') - $tahun_lahir;
+            $umur_pasien = $result[0]->umur;
 
             $jk = $result[0]->jk;
             $pekerjaan = $result[0]->pekerjaan;
@@ -90,7 +91,7 @@ class suratSakitController extends Controller
 
 
     public function getDataRanap($no_rawat) {
-        $sql = "SELECT reg_periksa.kd_dokter, reg_periksa.no_rkm_medis, pasien.nm_pasien, dokter.nm_dokter, pasien.tgl_lahir, pasien.jk,
+        $sql = "SELECT reg_periksa.kd_dokter, reg_periksa.no_rkm_medis, pasien.nm_pasien, dokter.nm_dokter, pasien.tgl_lahir, pasien.jk, pasien.umur,
                 pasien.pnd, pasien.pekerjaan, pasien.alamatpj, reg_periksa.status_lanjut, CONCAT(pasien.alamat, ' ', kecamatan.nm_kec, ' ', kabupaten.nm_kab) AS alamat,
                 kamar_inap.tgl_masuk, kamar_inap.tgl_keluar, IFNULL(surat_keterangan_rawat_inap.tanggalawal, '') AS tanggalawal,IFNULL(surat_keterangan_rawat_inap.tanggalakhir, '') AS tanggalakhir,
                 COALESCE((SELECT billing.tgl_byr FROM billing WHERE billing.no_rawat = reg_periksa.no_rawat LIMIT 1), '-') AS tgl_bayar,
@@ -125,7 +126,8 @@ class suratSakitController extends Controller
 
             $tanggal_lahir = strtotime($result[0]->tgl_lahir);
             $tahun_lahir = date('Y', $tanggal_lahir);
-            $umur_pasien = date('Y') - $tahun_lahir;
+            // $umur_pasien = date('Y') - $tahun_lahir;
+            $umur_pasien = $result[0]->umur;
 
             $jk = $result[0]->jk;
             $pekerjaan = $result[0]->pekerjaan;
