@@ -49,7 +49,8 @@
                     <tr class="data-pasien">
                         <td>Umur</td>
                         <td style="padding-left: 10px;">:</td>
-                        <td>{{ $data['umur'] == 0 ? '< 1' : $data['umur'] }} Tahun <span style="padding-left: 150px;">Jenis Kelamin : {{ $data['jk'] === 'L' ? 'Laki-Laki' : 'Perempuan' }}</span></td>
+                        <!-- <td>{{ $data['umur'] == 0 ? '< 1' : $data['umur'] }} Tahun <span style="padding-left: 150px;">Jenis Kelamin : {{ $data['jk'] === 'L' ? 'Laki-Laki' : 'Perempuan' }}</span></td> -->
+                        <td>{{ $data['umur'] }}<span style="padding-left: 150px;">Jenis Kelamin : {{ $data['jk'] === 'L' ? 'Laki-Laki' : 'Perempuan' }}</span></td>
                     </tr>
                     <tr class="data-pasien">
                         <td>Pekerjaan</td>
